@@ -20,12 +20,10 @@ class ViewController: UIViewController {
     let imageNames = ["1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021",]
     
     let labelArray = ["引爆摩天樓","第十四號獵物","世紀末的魔術師","瞳孔中的暗殺者","往天國的倒數計時","貝克街的亡靈","迷宮的十字路","銀翼的奇術師","水平線上的陰謀","偵探們的鎮魂歌","紺碧之棺","戰慄的樂譜","漆黑的追跡者","天空的遇難船","沉默的15分鐘","第11位前鋒","絕海的偵探","異次元的狙擊手","業火的向日葵","純黑的惡夢","唐紅的戀歌","零的執行人","紺青之拳", "紅之校外旅行","緋色的彈丸"]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        
         addGradientLayer()
         
         view.addSubview(movieNameLabel)
@@ -40,9 +38,6 @@ class ViewController: UIViewController {
         yearDatePicker.datePickerMode = .date
         
         imageView.image = UIImage(named: "1997")
-    
-       
-        
     }
 
     func addGradientLayer() {
@@ -60,6 +55,8 @@ class ViewController: UIViewController {
         yearLabel.text = Int(yearSlider.value + 1997).description
         movieNameLabel.text = labelArray[Int(yearSlider.value)]
         
+        let nextYear = DateComponents(calendar: Calendar.current, year: (Int(yearSlider.value) + 1997), month: 4, day: 19).date
+        yearDatePicker.date = nextYear!
     }
     
     @IBAction func yearChange(_ sender: UIDatePicker) {
@@ -82,25 +79,17 @@ class ViewController: UIViewController {
         sender.setValue(sender.value.rounded(), animated: true)
         changeContents()
         
-        let newYear = DateComponents(calendar: Calendar.current, year: (Int(sender.value) + 1997), month: 4, day: 19).date
-        yearDatePicker.date = newYear!
-
     }
     
     @IBAction func nextYear(_ sender: Any) {
         
         yearSlider.value += 1
-        let newYear = DateComponents(calendar: Calendar.current, year: Int(yearSlider.value) + 1997, month: 4, day: 19).date
-        yearDatePicker.date = newYear!
-        
         changeContents()
     }
     
     
     @IBAction func lastYear(_ sender: Any) {
         yearSlider.value -= 1
-        let newYear = DateComponents(calendar: Calendar.current, year: Int(yearSlider.value) + 1997, month: 4, day: 19).date
-        yearDatePicker.date = newYear!
         changeContents()
     }
     
